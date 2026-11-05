@@ -10,6 +10,7 @@ const app = express();
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 app.get("/api/health", async (req, res) => {
   try {
@@ -28,9 +29,9 @@ app.get("/api/health", async (req, res) => {
 });
 
 //TEMPORARY CODE
-const { protect, authorize } = require('./middleware/authMiddleware');
-app.get('/api/test/admin', protect, authorize('admin'), (req, res) =>
-  res.json({ success: true, message: 'Hello admin' })
+const { protect, authorize } = require("./middleware/authMiddleware");
+app.get("/api/test/admin", protect, authorize("admin"), (req, res) =>
+  res.json({ success: true, message: "Hello admin" }),
 );
 
 const PORT = process.env.PORT || 5000;
