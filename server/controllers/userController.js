@@ -16,24 +16,34 @@ exports.updateProfile = async (req, res) => {
 
     if (newPassword) {
       const full = await User.findWithPasswordById(req.user.id);
+
       const ok = await bcrypt.compare(
         currentPassword || "",
         full.password_hash,
       );
 
       if (!ok) {
-        return res
-          .status(400)
-          .json({ success: false, message: "Current password is incorrect" });
+        return res.status(400).json({
+          success: false,
+          message: "Current password is incorrect",
+        });
       }
+
       await User.updatePassword(
         req.user.id,
         await bcrypt.hash(newPassword, 10),
       );
     }
+
     await User.updateProfile(req.user.id, { name, phone, address });
-    const user = await User.findByEmail(req.user.id);
-    res.json({ success: true, message: "Profile updated", data: user });
+
+    const user = await User.findById(req.user.id);
+
+    res.json({
+      success: true,
+      message: "Profile updated",
+      data: user,
+    });
   } catch (error) {
     serverError(res, error);
   }

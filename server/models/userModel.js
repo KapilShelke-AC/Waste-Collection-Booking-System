@@ -46,7 +46,7 @@ exports.list = async ({ role, search }) => {
     params.push(role);
   }
   if (search) {
-    sql += "and (name like ? or email like ?)";
+    sql += " and (name like ? or email like ?)";
     params.push(`%${search}%`, `%${search}%`);
   }
   sql += " order by created_at desc";

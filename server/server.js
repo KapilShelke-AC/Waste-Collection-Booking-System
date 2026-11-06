@@ -2,6 +2,7 @@ require("dotenv").config();
 console.log("DB USER:", process.env.DB_USER);
 console.log("DB NAME:", process.env.DB_NAME);
 console.log("DB PASSWORD EXISTS:", !!process.env.DB_PASSWORD);
+
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db/pool");
@@ -11,6 +12,7 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/collector", require("./routes/collectorRoutes"));
 
 app.get("/api/health", async (req, res) => {
   try {

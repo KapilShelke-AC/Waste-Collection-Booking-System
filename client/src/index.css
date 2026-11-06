@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-900: #123B3A;  /* headings, hover on buttons */
+  --color-brand-700: #1D5C5A;  /* buttons, logo, main teal */
+  --color-brand-500: #2F8480;  /* accent text, focus ring */
+  --color-brand-100: #DCEEEE;  /* soft mint sections, success boxes */
+  --color-brand-50:  #EEF6F5;  /* page background */
+  --color-leaf:      #5FA777;  /* small green accents, Completed badge */
+  --color-cream:     #F4F2E8;  /* feature strip, cards */
+}
