@@ -1,0 +1,212 @@
+import { ProtectedRoute, GuestRoute } from "./components/ProtectedRoute";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./components/Layout";
+import "./styles/member2-pages.css";
+
+import Login from "./pages/public/Login";
+import Register from "./pages/public/Register";
+
+import Profile from "./pages/user/Profile";
+import BookPickup from "./pages/user/BookPickup";
+import MyBookings from "./pages/user/MyBookings";
+import EditBooking from "./pages/user/EditBooking";
+
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminBookings from "./pages/admin/AdminBookings";
+import ManageWasteTypes from "./pages/admin/ManageWasteTypes";
+
+import CollectorTasks from "./pages/collector/CollectorTasks";
+
+function Placeholder({ title }) {
+  const isHome = title === "Home (Member 3)";
+
+  return (
+    <div className="p-6 ml-10 flex-1">
+      {isHome ? (
+        <>
+          <h1 className="text-8xl font-bold mt-50">
+            Recycle<span className="text-brand-700">Connect</span>
+          </h1>
+
+          <h2 className="text-lg font-bold mt-5">
+            Reduce &middot; Recycle &middot; Reconnect
+          </h2>
+
+          <h2 className="text-lg mt-2">
+            Small steps. Big change.
+          </h2>
+
+          <h2 className="text-lg">
+            Together for a sustainable planet.
+          </h2>
+        </>
+      ) : (
+        <h1 className="text-3xl font-bold text-brand-700">
+          {title}
+        </h1>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+
+        {/* PUBLIC ROUTES */}
+        <Route
+          path="/"
+          element={<Placeholder title="Home (Member 3)" />}
+        />
+
+        <Route
+          path="/about"
+          element={<Placeholder title="About Us (Member 3)" />}
+        />
+
+        <Route
+          path="/contact"
+          element={<Placeholder title="Contact Us (Member 3)" />}
+        />
+
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              <Login />
+            </GuestRoute>
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <GuestRoute>
+              <Register />
+            </GuestRoute>
+          }
+        />
+
+        {/* AUTHENTICATED USER */}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* USER ROUTES */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute roles={["user"]}>
+              <Placeholder title="User Dashboard" />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/book"
+          element={
+            <ProtectedRoute roles={["user"]}>
+              <BookPickup />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-bookings"
+          element={
+            <ProtectedRoute roles={["user"]}>
+              <MyBookings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/book/:id/edit"
+          element={
+            <ProtectedRoute roles={["user"]}>
+              <EditBooking />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* COLLECTOR ROUTES */}
+        <Route
+          path="/collector"
+          element={
+            <ProtectedRoute roles={["collector"]}>
+              <CollectorTasks />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ADMIN ROUTES */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <Placeholder title="Admin Dashboard (Member 3)" />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/bookings"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminBookings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminUsers />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/waste-types"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <ManageWasteTypes />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/areas"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <Placeholder title="Manage Areas (Member 3)" />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/messages"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <Placeholder title="Manage Messages (Member 3)" />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* FALLBACK */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
+
+      </Route>
+    </Routes>
+  );
+}
