@@ -23,7 +23,6 @@ const LINKS = {
     ["Profile", "/profile"],
   ],
   admin: [
-    ["Dashboard", "/admin"],
     ["Bookings", "/admin/bookings"],
     ["Users", "/admin/users"],
     ["Waste Types", "/admin/waste-types"],
@@ -36,8 +35,8 @@ export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const links = LINKS[user ? user.role : "visitor"];
   const isHome = useLocation().pathname === "/";
+  const links = LINKS[user ? user.role : "visitor"];
 
   const handleLogout = () => {
     logout();
@@ -86,7 +85,7 @@ export default function Navbar() {
             <>
               <button
                 onClick={handleLogout}
-                className="ml-2 rounded bg-brand-600 px-3 py-1 text-sm text-white bg-brand-700"
+                className="ml-2 rounded px-3 py-1 text-sm text-white bg-brand-700"
               >
                 Logout
               </button>

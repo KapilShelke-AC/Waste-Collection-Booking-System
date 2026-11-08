@@ -211,14 +211,14 @@ export default function AdminUsers() {
                     <td className="space-x-1 p-2">
                       <button
                         onClick={() => startEdit(u)}
-                        className={`${btn} bg-brand-100 text-brand-900`}
+                        className={`${btn} btn-edit`}
                       >
                         Edit
                       </button>
                       {u.id !== me.id && (
                         <button
                           onClick={() => handleDelete(u)}
-                          className={`${btn} bg-red-100 text-red-700`}
+                          className={`${btn} btn-delete`}
                         >
                           Delete
                         </button>

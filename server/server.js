@@ -1,7 +1,4 @@
 require("dotenv").config();
-console.log("DB USER:", process.env.DB_USER);
-console.log("DB NAME:", process.env.DB_NAME);
-console.log("DB PASSWORD EXISTS:", !!process.env.DB_PASSWORD);
 
 const express = require("express");
 const cors = require("cors");
@@ -13,6 +10,10 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/collector", require("./routes/collectorRoutes"));
+app.use("/api/messages", require("./routes/messageRoutes"));
+app.use("/api/bookings", require("./routes/bookingRoutes"));
+app.use("/api/wastetypes", require("./routes/wasteTypeRoutes"));
+app.use("/api/areas", require("./routes/areaRoutes"));
 
 app.get("/api/health", async (req, res) => {
   try {
@@ -23,18 +24,11 @@ app.get("/api/health", async (req, res) => {
       data: rows[0],
     });
   } catch (error) {
-    console.log(error);
     res
       .status(500)
       .json({ success: false, message: "Database connection failed" });
   }
 });
 
-//TEMPORARY CODE
-const { protect, authorize } = require("./middleware/authMiddleware");
-app.get("/api/test/admin", protect, authorize("admin"), (req, res) =>
-  res.json({ success: true, message: "Hello admin" }),
-);
-
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+app.listen(PORT);

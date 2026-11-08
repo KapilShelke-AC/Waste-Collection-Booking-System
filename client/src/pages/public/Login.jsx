@@ -8,7 +8,7 @@ import { homeFor } from "../../utils/roles";
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const { state } = useLocation(); // success message sent from Register
+  const { state } = useLocation();
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
@@ -38,16 +38,19 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-[85vh] items-center justify-center bg-brand-50 p-4">
+    <div className="flex min-h-[85vh] items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100 p-4">
       <form
         onSubmit={handleSubmit}
         noValidate
         className="w-full max-w-sm rounded-xl bg-white p-6 shadow-md shadow-brand-700"
       >
+        <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 text-3xl">
+          🔐
+        </div>
         <h1 className="text-center text-2xl font-bold text-brand-700">
           Welcome back
         </h1>
-        <p className="mb-4 text-center text-sm text-gray-500">
+        <p className="mb-5 text-center text-sm text-gray-500">
           Login to manage your pickups
         </p>
 
@@ -82,14 +85,18 @@ export default function Login() {
 
         <button
           disabled={loading}
-          className="mt-2 w-full rounded bg-brand-600 py-2 font-semibold text-white bg-brand-700 disabled:opacity-60"
+          className="mt-3 w-full rounded-full bg-brand-700 py-2.5 font-semibold text-white transition hover:bg-brand-900 disabled:opacity-60"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
+
         <p className="mt-4 text-center text-sm">
           New here?{" "}
-          <Link to="/register" className="font-semibold text-brand-700">
-            Register
+          <Link
+            to="/register"
+            className="font-semibold text-brand-700 hover:underline"
+          >
+            Create an account
           </Link>
         </p>
       </form>

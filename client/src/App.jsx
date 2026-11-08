@@ -3,8 +3,18 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./pages/public/Login";
 import Register from "./pages/public/Register";
+import Contact from "./pages/public/Contact";
+import About from "./pages/public/About";
 import Profile from "./pages/user/Profile";
+import Dashboard from "./pages/user/Dashboard";
+import BookPickup from "./pages/user/BookPickup";
+import MyBookings from "./pages/user/MyBookings";
+import EditBooking from "./pages/user/EditBooking";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminBookings from "./pages/admin/AdminBookings";
+import ManageWasteTypes from "./pages/admin/ManageWasteTypes";
+import ManageAreas from "./pages/admin/ManageAreas";
+import AdminMessages from "./pages/admin/AdminMessages";
 import CollectorTasks from "./pages/collector/CollectorTasks";
 
 function Placeholder({ title }) {
@@ -38,16 +48,8 @@ export default function App() {
       <Route element={<Layout />}>
         {/* Public */}
         <Route path="/" element={<Placeholder title="Home (Member 3)" />} />
-
-        <Route
-          path="/about"
-          element={<Placeholder title="About Us (Member 3)" />}
-        />
-
-        <Route
-          path="/contact"
-          element={<Placeholder title="Contact Us (Member 3)" />}
-        />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
 
         <Route
           path="/login"
@@ -82,7 +84,7 @@ export default function App() {
           path="/dashboard"
           element={
             <ProtectedRoute roles={["user"]}>
-              <Placeholder title="User Dashboard" />
+              <Dashboard />
             </ProtectedRoute>
           }
         />
@@ -91,7 +93,7 @@ export default function App() {
           path="/book"
           element={
             <ProtectedRoute roles={["user"]}>
-              <Placeholder title="Book pickup (Member 2)" />
+              <BookPickup />
             </ProtectedRoute>
           }
         />
@@ -100,7 +102,16 @@ export default function App() {
           path="/my-bookings"
           element={
             <ProtectedRoute roles={["user"]}>
-              <Placeholder title="My bookings (Member 2)" />
+              <MyBookings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/book/:id/edit"
+          element={
+            <ProtectedRoute roles={["user"]}>
+              <EditBooking />
             </ProtectedRoute>
           }
         />
@@ -115,12 +126,12 @@ export default function App() {
           }
         />
 
-        {/* Admin */}
+        {/* Admin (no dashboard page, so /admin goes to bookings) */}
         <Route
           path="/admin"
           element={
             <ProtectedRoute roles={["admin"]}>
-              <Placeholder title="Admin dashboard (Member 3)" />
+              <Navigate to="/admin/bookings" replace />
             </ProtectedRoute>
           }
         />
@@ -129,7 +140,7 @@ export default function App() {
           path="/admin/bookings"
           element={
             <ProtectedRoute roles={["admin"]}>
-              <Placeholder title="Admin bookings (Member 2)" />
+              <AdminBookings />
             </ProtectedRoute>
           }
         />
@@ -147,7 +158,7 @@ export default function App() {
           path="/admin/waste-types"
           element={
             <ProtectedRoute roles={["admin"]}>
-              <Placeholder title="Waste types (Member 3)" />
+              <ManageWasteTypes />
             </ProtectedRoute>
           }
         />
@@ -156,7 +167,7 @@ export default function App() {
           path="/admin/areas"
           element={
             <ProtectedRoute roles={["admin"]}>
-              <Placeholder title="Areas (Member 3)" />
+              <ManageAreas />
             </ProtectedRoute>
           }
         />
@@ -165,7 +176,7 @@ export default function App() {
           path="/admin/messages"
           element={
             <ProtectedRoute roles={["admin"]}>
-              <Placeholder title="Messages (Member 3)" />
+              <AdminMessages />
             </ProtectedRoute>
           }
         />

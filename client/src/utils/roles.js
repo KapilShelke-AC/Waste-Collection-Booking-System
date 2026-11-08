@@ -1,5 +1,5 @@
 export const homeFor = {
   user: "/dashboard",
-  admin: "/admin",
+  admin: "/admin/bookings",
   collector: "/collector",
 };

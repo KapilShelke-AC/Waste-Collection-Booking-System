@@ -60,15 +60,19 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-[85vh] items-center justify-center bg-brand-50 p-4">
+    <div className="flex min-h-[85vh] items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100 p-4">
       <form
         onSubmit={handleSubmit}
         noValidate
         className="w-full max-w-sm rounded-xl bg-white p-6 shadow-md shadow-brand-700"
       >
-        <h1 className="mb-4 text-center text-2xl font-bold text-brand-700">
+        <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 text-3xl">
+          ♻️
+        </div>
+        <h1 className="text-center text-2xl font-bold text-brand-700">
           Create your account
         </h1>
+
         {serverError && (
           <p className="mb-3 rounded bg-red-100 p-2 text-sm text-red-700">
             {serverError}
@@ -81,6 +85,7 @@ export default function Register() {
           value={form.name}
           onChange={handleChange}
           error={errors.name}
+          placeholder="Your full name"
         />
         <FormInput
           label="Email"
@@ -88,6 +93,7 @@ export default function Register() {
           value={form.email}
           onChange={handleChange}
           error={errors.email}
+          placeholder="xyz@example.com"
         />
         <FormInput
           label="Phone"
@@ -95,6 +101,7 @@ export default function Register() {
           value={form.phone}
           onChange={handleChange}
           error={errors.phone}
+          placeholder="10-digit phone number"
         />
         <FormInput
           label="Address"
@@ -102,6 +109,7 @@ export default function Register() {
           value={form.address}
           onChange={handleChange}
           error={errors.address}
+          placeholder="House no, street, area"
         />
         <FormInput
           label="Password"
@@ -110,6 +118,7 @@ export default function Register() {
           value={form.password}
           onChange={handleChange}
           error={errors.password}
+          placeholder="********"
         />
         <FormInput
           label="Confirm password"
@@ -118,17 +127,22 @@ export default function Register() {
           value={form.confirmPassword}
           onChange={handleChange}
           error={errors.confirmPassword}
+          placeholder="********"
         />
 
         <button
           disabled={loading}
-          className="mt-2 w-full rounded bg-brand-600 py-2 font-semibold text-white bg-brand-700 disabled:opacity-60"
+          className="mt-3 w-full rounded-full bg-brand-700 py-2.5 font-semibold text-white transition hover:bg-brand-900 disabled:opacity-60"
         >
           {loading ? "Creating account..." : "Register"}
         </button>
+
         <p className="mt-4 text-center text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="font-semibold text-brand-700">
+          <Link
+            to="/login"
+            className="font-semibold text-brand-700 hover:underline"
+          >
             Login
           </Link>
         </p>

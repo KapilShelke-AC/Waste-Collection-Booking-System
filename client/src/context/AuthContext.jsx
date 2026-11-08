@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
 
   const updateUser = (u) => {
     localStorage.setItem("user", JSON.stringify(u));
-    setUser(u);
+    setUser(u); 
   };
 
   return (
